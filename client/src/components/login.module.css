@@ -1,0 +1,69 @@
+.container {
+	overflow: auto;
+}
+
+.background {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	min-height: 100vh;
+	z-index: -1;
+}
+
+.card {
+	height: 450px;
+	border-radius: 8px;
+	max-width: 600px;
+	width: 80%;
+	background: #FFFFFF22;
+	margin: 100px auto 30px auto;
+	border: 1px solid #B0747466;
+	box-shadow: 3px 3px 5px #98808033;
+}
+
+.back {
+	display: flex;
+	align-items: center;
+	margin: 20px 0 0 30px;
+	cursor: pointer;
+}
+
+.back > img {
+}
+
+.title {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+	max-width: 400px;
+	margin: auto;
+}
+
+.form > * {
+	display: block;
+	margin: 5px 0;
+}
+
+.form > label {
+	font-size: 14px;
+}
+
+.form > input {
+	margin-bottom: 30px;
+}
+
+.btn {
+	height: 40px;
+	width: 80px;
+	color: black;
+	background: white;
+	border: 1px solid gray;
+	border-radius: 4px;
+	cursor: pointer;
+}
