@@ -1,13 +1,10 @@
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useState, createContext } from "react";
-import { UserCtx } from './context'
+import { UserCtx } from './context';
 
 // Components
-import Home from "./components/home";
-import Login from "./components/login";
-import Register from "./components/register";
-import Dashboard from "./components/dashboard";
+import AppRoute from './components/AppRoute'
 
 // Set User Properties
 
@@ -42,22 +39,7 @@ function App() {
   return (
     <UserCtx.Provider value={{user, handleUser, cookies, handleCookies}}>
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Home/>
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard/>
-          </Route>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-        </Switch>
-      </Router>
+      <AppRoute/>
     </div>
     </UserCtx.Provider>
   );

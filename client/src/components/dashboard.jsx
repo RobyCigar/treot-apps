@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { UserCtx } from "../context";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import styles from "./dashboard.module.css";
+
+// Component
 
 // asset
 import background from "../asset/background1.jpg";
@@ -23,7 +25,6 @@ const Dashboard = (props) => {
 					token: user.token.split(" ")[1],
 				})
 				.then((res) => {
-					console.log("ini response", res);
 					handleUser(res.data.success);
 				})
 				.catch((err) => {
@@ -36,7 +37,6 @@ const Dashboard = (props) => {
 					token: cookies.token.split(" ")[1],
 				})
 				.then((res) => {
-					console.log("ini response", res);
 					handleUser(res.data.success);
 					if (res.data.success.role == "ADMIN") {
 						setIsAdmin(true);
@@ -86,6 +86,7 @@ const Dashboard = (props) => {
 
 	return (
 		<div>
+
 			<img
 				src={background}
 				alt="background"

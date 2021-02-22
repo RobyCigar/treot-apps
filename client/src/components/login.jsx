@@ -9,7 +9,7 @@ import alert from "../asset/alert.svg";
 import background from "../asset/background1.jpg";
 import styles from "./login.module.css";
 
-// Using reducer instead of useState
+// Using reducer for complex
 const formReducer = (state, action) => {
 	return {
 		data: action,

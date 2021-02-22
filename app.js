@@ -38,15 +38,14 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: 'http://localhost:3000'
 }
-
+app.use(cors(corsOptions))
 
 // Define route
-app.use("/", cors(corsOptions), authRouter);
-app.use("/user", cors(corsOptions), userRouter);
-app.use("/soal", cors(corsOptions), soalRouter);
+app.use("/", authRouter);
+app.use("/user", userRouter);
+app.use("/soal", soalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

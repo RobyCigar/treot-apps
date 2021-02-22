@@ -74,68 +74,48 @@ router.route("/register").post((req, res) => {
 		return res.status(400).json({ error: "You must fill the password" });
 
 	// Check if user is already exist
-	Users.findOne({ email }).then((user) => {
-		if(user) 
-			return res.status(400).json({error: "this email is already exist"})
-	})
+	Users.findOne({ email }).then((user, err) => {
+		if(err) return console.log(err)
+		if(user) return res.status(400).json({error: "this email is already exist"})
 
-	bcrypt.genSalt(10, (err, salt) => {
-		bcrypt.hash(password, salt, (err, hash) => {
-			if (err) {
-				console.log("bcrypt failed");
-				return res.status(400).json({
-					error:
-						"Your request could not be processed Please try again.",
-				});
-			}
-
-			const encryptedPass = hash;
-
-			const newUser = new Users({
-				name: name,
-				email: email,
-				password: encryptedPass,
-				role: role,
-				created: Date.now(),
-			});
-
-			newUser.save(async (err, user) => {
+		console.log('im here')
+		bcrypt.genSalt(10, (err, salt) => {
+			bcrypt.hash(password, salt, (err, hash) => {
 				if (err) {
-					console.log(err);
+					console.log("bcrypt failed");
 					return res.status(400).json({
 						error:
-							"Your request could not be processed. Please try again",
+							"Your request could not be processed Please try again.",
 					});
 				}
 
-				const payload = {
-					id: user._id,
-					role: user.role,
-				};
+				const encryptedPass = hash;
 
-				jwt.sign(
-					payload,
-					secret,
-					{ expiresIn: tokenLife },
-					(err, token) => {
-						if (err) {
-							console.log(err);
-						}
-						res.status(200).json({
-							succes: true,
-							token: `Bearer ${token}`,
-							user: {
-								id: user._id,
-								name: user.name,
-								email: user.email,
-								role: user.role,
-							},
+				const newUser = new Users({
+					name: name,
+					email: email,
+					password: encryptedPass,
+					role: role,
+					created: Date.now(),
+				});
+
+				newUser.save(async (err, user) => {
+					if (err) {
+						console.log(err);
+						return res.status(400).json({
+							error:
+								"Your request could not be processed. Please try again",
 						});
 					}
-				);
+
+					res.status(200).json({
+						succes: true,
+						message: "User has successfully created"
+					});
+				});
 			});
 		});
-	});
+	})
 });
 
 //This is a protected route

@@ -2,7 +2,9 @@ import React from 'react';
 
 const EditUser = (props) => {
   return (
-    <div>Edit</div>
+    <div>
+    	<h1>Edit</h1>
+    </div>
   )
 }
 
