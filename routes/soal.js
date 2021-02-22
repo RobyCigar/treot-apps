@@ -8,46 +8,41 @@ const router = express.Router();
 const { secret } = keys.jwt
 
 router.get("/", (req, res) => {
-	const { token } = req.body;
-	jwt.verify(token, secret, (err, authorizedData) => {
-		if (err) {
-			//If error send Forbidden (403)
-			console.log(err);
-			res.sendStatus(403);
-		} else {
+	Soal.find({}, (err, soal) => {
+		if(err) {
 			console.log(err)
-			Soal.find({}, (err, soal) => {
-				if(err) {
-					console.log(err)
-					return res.status(400).json({error: "Cannot get all soal"})
-				} else {
-					return res.status(200).json({
-						soal: soal
-					})
-				}
+			return res.status(400).json({error: "Cannot get all soal"})
+		} else {
+			return res.status(200).json({
+				soal: soal
 			})
 		}
-	});
+	})
 })
 
 router.post("/", (req, res) => {
-	const { soal } = req.body;
+	const { nama, soal, createdBy } = req.body;
 
+	if (!createdBy) return res.status(400).json({error:'You should add the creator of soal'})
 	if (!soal)
 		return res
 			.status(400)
 			.json({ error: "Soal missing, add the correct soal" });
 
 	const newSoal = new Soal({
+		nama: nama,
 		soal: soal,
+		createdBy: createdBy,
 		created: Date.now(),
 	});
 
 	newSoal.save(async (err, soal) => {
-		if (err)
+		if (err) {
+			console.log(err)
 			return res
 				.status(400)
 				.json({ error: "Failed to send soal to the database" });
+		}
 		res.status(200).json({ success: "Soal successfully added" });
 	});
 });

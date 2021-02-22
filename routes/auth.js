@@ -51,9 +51,6 @@ router.route("/login").post((req, res) => {
 							token: `Bearer ${token}`,
 							user: {
 								id: user._id,
-								name: user.name,
-								email: user.email,
-								role: user.role,
 							},
 						});
 					}
@@ -67,14 +64,20 @@ router.route("/login").post((req, res) => {
 
 // REGISTER
 router.route("/register").post((req, res) => {
-	if (!req.body.name)
+	const { name, email, password, role } = req.body;
+
+	if (!name)
 		return res.status(400).json({ error: "You must fill the name" });
-	if (!req.body.email)
+	if (!email)
 		return res.status(400).json({ error: "You must fill the email" });
-	if (!req.body.password)
+	if (!password)
 		return res.status(400).json({ error: "You must fill the password" });
 
-	const { name, email, password, role } = req.body;
+	// Check if user is already exist
+	Users.findOne({ email }).then((user) => {
+		if(user) 
+			return res.status(400).json({error: "this email is already exist"})
+	})
 
 	bcrypt.genSalt(10, (err, salt) => {
 		bcrypt.hash(password, salt, (err, hash) => {

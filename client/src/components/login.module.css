@@ -1,11 +1,12 @@
 .container {
 	overflow: auto;
+	height: auto;
 }
 
 .background {
 	position: absolute;
 	width: 100vw;
-	height: 100vh;
+	height: 600px;
 	min-height: 100vh;
 	z-index: -1;
 }
@@ -14,6 +15,7 @@
 	height: 450px;
 	border-radius: 8px;
 	max-width: 600px;
+	min-width: 340px;
 	width: 80%;
 	background: #FFFFFF22;
 	margin: 100px auto 30px auto;
@@ -66,4 +68,39 @@
 	border: 1px solid gray;
 	border-radius: 4px;
 	cursor: pointer;
+}
+
+.error {
+	position: absolute;
+	display: flex;
+	vertical-align: center;
+	min-width: 250px;
+	top: 20px;
+	left: 50%;
+	color: red;
+	font-size: 12px;
+	border-radius: 4px;
+	background: #FFF5F5;
+	padding: 10px 10px;
+	box-shadow: 0 10px 20px #BFAFAF;
+	-webkit-transform: translate(-50%, 0);
+	   -moz-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	     -o-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
+}
+
+.error > p {
+	padding: 5px 0 0 10px;
+}
+
+@keyframes pop {
+	0% {
+		opacity: 0;
+		top: 10px;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }

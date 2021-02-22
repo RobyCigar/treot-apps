@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "./home.module.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { UserCtx } from '../context';
 
 // import asset
 import background from "../asset/bubble.jpg";
@@ -8,11 +9,17 @@ import twitter from "../asset/twitter.svg";
 import instagram from "../asset/insta.svg";
 
 const Home = (props) => {
+	const user = useContext(UserCtx)
 
+	console.log('ini user context ', user)
 	if (!background || !twitter || !instagram) {
 		return <h1>Loading...</h1>;
 	}
 	
+	console.log('props di home', props)
+
+	console.log('ini user', user)
+
 	return (
 		<div className={styles.container}>
 			<img
