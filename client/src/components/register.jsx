@@ -10,7 +10,6 @@ import styles from "./register.module.css";
 
 // reducer
 const formReducer = (state, action) => {
-	console.log('here in reducer')
 	return action
 }
 
@@ -18,7 +17,6 @@ const Register = () => {
 	const [errMsg, setErrMsg] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [formData, dispatch] = useReducer(formReducer, false)
-	console.log('ini form data', formData)
 
 	useEffect(() => {
 		if(formData) {
@@ -29,7 +27,6 @@ const Register = () => {
 			})
 			.then(res => {
 				console.log(res)
-				setIsSuccess(res.data.message)
 			})
 			.catch(error => {
 					if (error.response) {

@@ -10,7 +10,7 @@
 
 .logout {
 	display: flex;
-	margin: 20px;
+	margin: 20px auto 0 20px;
 }
 
 .logout > img {
@@ -23,7 +23,7 @@
 }
 
 .profile {
-	margin: 20px 0 40px 0;
+	margin: 0 0 40px 0;
 }
 
 .profile > img {
@@ -50,4 +50,49 @@
 	    -ms-transform: translate(-50%,-50%);
 	     -o-transform: translate(-50%,-50%);
 	        transform: translate(-50%,-50%);
+}
+
+.editUser {
+	position: relative;
+	left: 60%;
+	-webkit-transform: translate(-50%, 0);
+	   -moz-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	     -o-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
+}
+
+.editUser > div {
+	display: flex;
+}
+
+.editUser > div > img {
+	height: 18px;
+	margin-right: 10px;
+}
+
+
+.tr {
+	text-align: center;
+	padding: 8px 0;
+	border-radius: 10px;	
+}
+
+.white {
+	background: #FFFFFF77;
+}
+
+.transparent {
+	background: #FFFFFF44;
+}
+
+td, th {
+	padding: 10px;
+	border: 4px solid #FFFFFF00;
+	margin: 10px;
+}
+
+table, th, td {
+	border-width: 10px;
+	border-collapse: collapse;
 }

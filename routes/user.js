@@ -44,25 +44,31 @@ router.post("/", (req, res) => {
 
 	jwt.verify(token, secret, function (err, decoded) {
 		if (err) return res.status(400).json({ error: "JWT not valid" });
-		
+
 		Users.findById(decoded.id, (err, user) => {
-			if (err) return res.status(400).json({ error: "JWT decoded but cannot find Id" });
-			res.status(200).json({success: user})
-		})
+			if (err)
+				return res
+					.status(400)
+					.json({ error: "JWT decoded but cannot find Id" });
+			res.status(200).json({ success: user });
+		});
 	});
 });
 
 router.get("/:id", (req, res) => {
 	const { id } = req.params;
 
+
+	console.log('hi')
+
 	if (!id) return res.status(400).json({ error: "Please provide an id" });
 
-	User.findById(id, (err, user) => {
+	Users.findById(id, (err, user) => {
 		if (err) {
 			console.log(err);
 			return res.status(400).json({ error: "Failed to find user id" });
 		}
-
+		console.log('hai')
 		res.status(200).json({ success: user });
 	});
 });
@@ -70,13 +76,23 @@ router.get("/:id", (req, res) => {
 router.put("/:id", upload.any(), (req, res) => {
 	const { id } = req.params;
 	const { name } = req.body;
+	const file = req.files[0].path
 
+	console.log(req.files)
+	console.log('ini req body', req.body)
 	Users.findOneAndUpdate(
 		{
 			_id: id,
 		},
 		{
-			name: req.body.name,
+			name: name,
+			avatar: file.split("uploads/")[1]
+		}, (err, user) => {
+			if(err) {
+				console.log(err)
+				return res.status(400).json({error: "failed to update"})
+			}
+			res.status(200).json({success: user})
 		}
 	);
 });

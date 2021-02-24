@@ -6,6 +6,7 @@ import Register from './register'
 import Dashboard from './dashboard'
 import EditSoal from './editSoal';
 import EditUser from './editUser';
+import Soal from './soal'
 
 const AppRoute = (props) => {
   return (
@@ -36,11 +37,16 @@ const UserRoute = () => {
 	const { path, url } = useRouteMatch()
 	return (
 		<>
-			<Dashboard/>
 			<Switch>
-				<Route exact path={`${path}/:userId`}>
-					<EditUser/>
+				<Route exact path={path}>
+			     <Dashboard/>
 				</Route>
+        <Route path={`${path}/:userId`}>
+          <EditUser/>
+        </Route>
+        <Route path="/soal/:soalId">
+          <Soal />
+        </Route>
 			</Switch>
 		</>
 	)

@@ -5,6 +5,10 @@ const soalSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	time: {
+		type: Number,
+		required: true
+	},
 	soal: {
 		type: Array,
 		required: true
