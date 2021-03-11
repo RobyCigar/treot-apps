@@ -41,10 +41,13 @@ const UserRoute = () => {
 				<Route exact path={path}>
 			     <Dashboard/>
 				</Route>
-        <Route path={`${path}/:userId`}>
+        <Route path={`${path}/edit/:userId`}>
           <EditUser/>
         </Route>
-        <Route path="/soal/:soalId">
+        <Route path={`${path}/soal/:soalId`}>
+          <Soal />
+        </Route>
+        <Route path={`${path}/soal/:soalId`}>
           <Soal />
         </Route>
 			</Switch>

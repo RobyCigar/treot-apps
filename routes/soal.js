@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-	const { nama, soal, createdBy } = req.body;
+	const { nama, soal, createdBy, time } = req.body;
 
 	if (!createdBy) return res.status(400).json({error:'You should add the creator of soal'})
 	if (!soal)
@@ -31,10 +31,12 @@ router.post("/", (req, res) => {
 
 	const newSoal = new Soal({
 		nama: nama,
-		soal: soal,
+		soal: soal.soal,
+		time: time,
 		createdBy: createdBy,
 		created: Date.now(),
 	});
+
 
 	newSoal.save(async (err, soal) => {
 		if (err) {

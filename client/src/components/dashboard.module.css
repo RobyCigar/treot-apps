@@ -1,8 +1,6 @@
 .background {
 	width: 100vw;
-	height: 100%;
 	position: absolute;
-	background-size: cover;
 	top: 0;
 	left: 0;
 	z-index: -10;
@@ -23,7 +21,7 @@
 }
 
 .profile {
-	margin: 0 0 40px 0;
+	margin: 0 0 20px 0;
 }
 
 .profile > img {
@@ -52,6 +50,18 @@
 	        transform: translate(-50%,-50%);
 }
 
+.soalLoading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	   -moz-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	     -o-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
+}
+
+
 .editUser {
 	position: relative;
 	left: 60%;
@@ -60,6 +70,10 @@
 	    -ms-transform: translate(-50%, 0);
 	     -o-transform: translate(-50%, 0);
 	        transform: translate(-50%, 0);
+}
+
+.editUser:hover {
+	opacity: 0.7;
 }
 
 .editUser > div {
@@ -71,6 +85,7 @@
 	margin-right: 10px;
 }
 
+/* TABLE */
 
 .tr {
 	text-align: center;
@@ -86,6 +101,28 @@
 	background: #FFFFFF44;
 }
 
+.soalName:hover {
+	opacity: 0.7;
+}
+
+.editSoal {
+	color: blue;
+	cursor: pointer;
+}
+
+.editSoal:hover {
+	opacity: 0.7;
+}
+
+.deleteSoal {
+	color: red;
+	cursor: pointer;
+}
+
+.deleteSoal:hover {
+	opacity: 0.7;
+}
+
 td, th {
 	padding: 10px;
 	border: 4px solid #FFFFFF00;
@@ -95,4 +132,38 @@ td, th {
 table, th, td {
 	border-width: 10px;
 	border-collapse: collapse;
+}
+
+.tab {
+	display: flex;
+	justify-content: center;
+	font-family: "Poppins";
+}
+
+.tabList {
+	margin: 10px 10px 40px 10px;
+	width: 100px;
+	cursor: pointer;
+	text-align: center;
+	position: relative;
+}
+
+.active::after {
+	content: "";
+	display: block;
+	height: 3px;
+	margin-top: 9px;
+	width: 100%;
+	background: blue;
+	animation: fade 1s 1;
+}
+
+@keyframes fade {
+	from {
+		width: 0;
+	}
+
+	to {
+		width: 100%;
+	}
 }
