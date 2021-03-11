@@ -61,9 +61,7 @@ router.get("/:id", (req, res) => {
 	Soal.findById(id, (err, soal) => {
 		if (err) return res.status(400).json({ error: "Cannot find soal" });
 		res.status(200).json({
-			soal: soal.soal,
-			created: soal.created,
-			updated: soal.updated,
+			soal: soal,
 		});
 	});
 });

@@ -161,6 +161,9 @@ const Dashboard = (props) => {
 					isAdmin={isAdmin}
 					path={path}
 					handleModal={handleModal}
+					showModal={showModal}
+					handleDeleteSoal={handleDeleteSoal}
+					soalId={soalId}
 					/>
 					: null
 				}
@@ -168,23 +171,15 @@ const Dashboard = (props) => {
 				{ active == 'Users' ? 
 
 				<UsersTable
-					soal={soal}
-					active={active}
-					isAdmin={isAdmin}
 					path={path}
 					handleModal={handleModal}
+					showModal={showModal}
 					/>
 					: null
 				}
 
 			</main>
-			{showModal ? (
-				<Modal
-					text={"Are you sure want to delete ? "}
-					yesOption={(e) => handleDeleteSoal(e, soalId)}
-					noOption={handleModal}
-				/>
-			) : null}
+
 		</div>
 	);
 };

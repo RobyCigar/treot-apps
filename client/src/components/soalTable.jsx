@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './dashboard.module.css'
 import { Link } from 'react-router-dom'
+import trashIcon from '../asset/trash.svg'
+import Modal from './modal'
 
-const SoalTable = ({soal, active, isAdmin, path, handleModal}) => {
+const SoalTable = ({soal, active, isAdmin, path, handleModal, showModal, soalId, handleDeleteSoal}) => {
   return (
 <>
 				{soal  ? (
@@ -53,7 +55,7 @@ const SoalTable = ({soal, active, isAdmin, path, handleModal}) => {
 													onClick={(e) => handleModal(e, val._id)}
 													className={styles.deleteSoal}
 												>
-													delete
+													<img className={styles.icon} src={trashIcon} alt=""/>
 												</td>
 											</>
 										) : null}
@@ -67,6 +69,14 @@ const SoalTable = ({soal, active, isAdmin, path, handleModal}) => {
 						<tr className={styles.soalLoading}>Loading Soal...</tr>
 					</>
 				)}
+
+			{showModal ? (
+				<Modal
+					text={"Are you sure want to delete soal ? "}
+					yesOption={(e) => handleDeleteSoal(e, soalId)}
+					noOption={handleModal}
+				/>
+			) : null}
 
 </>
   )

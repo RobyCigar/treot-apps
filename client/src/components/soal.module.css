@@ -1,5 +1,13 @@
 .background {
+	position: fixed;
 	width: 100vw;
-	position: absolute;
+	height: 100vh;
 	z-index: -10;
+}
+
+.container {
+}
+
+.soal {
+	
 }
