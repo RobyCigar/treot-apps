@@ -3,16 +3,23 @@ import axios from "axios";
 import { useParams, Redirect } from "react-router-dom";
 import styles from "./soal.module.css";
 import Modal from "./modal";
+import Timer from "./timer";
+import SoalCard from './soalCard'
+import Loading from './loading'
 
 // asset
 import background from "../asset/background1.jpg";
 
+
 const Soal = (props) => {
 	const [soal, setSoal] = useState(false);
-	const [currentSoal, setCurrentSoal] = useState(null);
+	const [currentSoal, setCurrentSoal] = useState(false);
+	const [modal, setModal] = useState(false);
 	const [time, setTime] = useState(0);
+	const [numSoal, setNumSoal] = useState(1);
+	const [timeOver, setTimeOver] = useState(false);
 	const [exit, setExit] = useState(false);
-	const [score, setScore] = useState(0);
+	const [userAnswer, setUserAnswer] = useState([])
 
 	let { soalId } = useParams();
 
@@ -23,7 +30,12 @@ const Soal = (props) => {
 			url: `http://localhost:8000/soal/${soalId}`,
 		})
 			.then((res) => {
-				setSoal(res.data.soal);
+				const { soal } = res.data;
+				setSoal(soal);
+				setTime(soal.time);
+				soal.soal.forEach((val, i) => {
+					setUserAnswer(userAnswer => [...userAnswer, false])
+				})
 			})
 			.catch((err) => {
 				console.log(err.response);
@@ -34,16 +46,45 @@ const Soal = (props) => {
 		setCurrentSoal();
 	};
 
+	const handleModal = () => {
+		setModal(!modal);
+	};
+
+	const handleTimeout = () => {
+		setTimeOver(true);
+	};
+
+	const prevSoal = (e, setState, state) => {
+		if(setState) {
+			setState(state)
+		}
+		setNumSoal(numSoal - 1);
+		setCurrentSoal(soal.soal[numSoal]);
+	};
+
+	const nextSoal = (e, setState, state) => {
+		if(setState) {
+			setState(state)
+		}
+		setNumSoal(numSoal + 1);
+		setCurrentSoal(soal.soal[numSoal]);
+	};
+
+	const handleAnswer = (e) => {
+		if (currentSoal.jawaban === e.target.value) {
+			console.log("benar");
+		} else {
+			console.log("salah");
+		}
+	};
+
 	if (exit) {
 		return <Redirect to="/dashboard" />;
 	}
 
-	if (!soal) {
-		return <h1>Loading...</h1>;
+	if (!soal && !currentSoal) {
+		return <Loading/>;
 	}
-
-	console.log("ini soal", soal);
-	console.log("ini current soal map", currentSoal.pilihan);
 
 	return (
 		<>
@@ -51,21 +92,23 @@ const Soal = (props) => {
 			<div className={styles.container}>
 				{currentSoal ? (
 					<>
-						<p className={styles.soal}>{currentSoal.soal}</p>
-						<div className={styles.pilihan}>
-							{currentSoal.pilihan.map(val => {
-								<>
-									<input type="radio" />
-									<label for={val}>{val}</label>
-								</>
-							})}
-							<br />
-							<input type="radio" id="female" name="gender" value="female" />
-							<label for="female">Female</label>
-							<br />
-							<input type="radio" id="other" name="gender" value="other" />
-							<label for="other">Other</label>
+						<div className={styles.head}>
+							<p onClick={handleModal} style={{cursor:"pointer"}}> ← Exit</p>
+							<div>
+								<Timer handleTimeout={handleTimeout} time={time} />
+								<div onClick={handleModal} className={styles.submit}>Submit</div>
+							</div>
 						</div>
+						<SoalCard
+							numSoal={numSoal}
+							currentSoal={currentSoal}
+							handleAnswer={handleAnswer}
+							userAnswer={userAnswer}
+							prevSoal={prevSoal}
+							nextSoal={nextSoal}
+							soal={soal}
+						/>
+
 					</>
 				) : (
 					<>
@@ -76,6 +119,25 @@ const Soal = (props) => {
 						/>
 					</>
 				)}
+
+				{modal ? (
+					<>
+						<Modal
+							text={"Apakah kamu yakin ingin meninggalkan ujian & menyimpan jawaban? "}
+							yesOption={(e) => setExit(true)}
+							noOption={handleModal}
+						/>
+					</>
+				) : null}
+
+				{timeOver ? (
+					<>
+						<Modal
+							text={"Waktu kamu sudah habis"}
+							okOption={(e) => setExit(true)}
+						/>
+					</>
+				) : null}
 			</div>
 		</>
 	);

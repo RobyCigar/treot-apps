@@ -16,6 +16,7 @@ import Modal from "./modal";
 import SoalTable from "./soalTable";
 import UsersTable from './usersTable';
 import { deleteSoal } from "./api.js";
+import Loading from './loading'
 
 // asset
 import background from "../asset/background1.jpg";
@@ -72,7 +73,7 @@ const Dashboard = (props) => {
 	}
 
 	if (!user) {
-		return <p className={styles.loading}>Loading</p>;
+		return <p className={styles.loading}><Loading/></p>;
 	}
 
 	if (isLogout) {

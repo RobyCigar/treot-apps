@@ -3,6 +3,7 @@ import styles from './dashboard.module.css'
 import { Link } from 'react-router-dom'
 import trashIcon from '../asset/trash.svg'
 import Modal from './modal'
+import Loading from './loading'
 
 const SoalTable = ({soal, active, isAdmin, path, handleModal, showModal, soalId, handleDeleteSoal}) => {
   return (
@@ -66,7 +67,7 @@ const SoalTable = ({soal, active, isAdmin, path, handleModal, showModal, soalId,
 					</table>
 				) : (
 					<>
-						<tr className={styles.soalLoading}>Loading Soal...</tr>
+						<tr className={styles.soalLoading}><Loading /></tr>
 					</>
 				)}
 

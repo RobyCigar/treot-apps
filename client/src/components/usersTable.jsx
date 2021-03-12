@@ -3,6 +3,7 @@ import axios from "axios";
 import { getUsers, deleteUser } from "./api";
 import styles from "./dashboard.module.css";
 import Modal from './modal'
+import Loading from './loading'
 
 // asset
 import trashIcon from '../asset/trash.svg'
@@ -73,7 +74,7 @@ const UsersTable = () => {
 				</table>
 			) : (
 				<>
-					<tr className={styles.soalLoading}>Loading Soal...</tr>
+					<tr className={styles.soalLoading}><Loading/></tr>
 				</>
 			)}
 

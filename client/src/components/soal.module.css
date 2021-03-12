@@ -5,9 +5,86 @@
 	z-index: -10;
 }
 
-.container {
+.head {
+	display: flex;
+	min-width: 250px;
+	justify-content: space-between;
+	padding: 3% 7% 0 7%;
+}
+
+.submit {
+	margin-top: 30px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	text-align: right;
+}
+
+.card {
+	margin: 2% auto 100px auto;
+	width: 50%;
+	min-width: 200px;
+	background: #FFFFFF88;
+	padding: 50px 40px;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px #33333355;
 }
 
 .soal {
-	
+	margin: 20px 0;
+	line-height: 1.8rem;
+}
+
+.pilihan {
+	display: flex;
+	flex-direction: column;
+}
+
+.pilgan {
+	margin: 10px 5px;
+	padding: 9px 15px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.pilgan:hover {
+	opacity: 0.75;
+}
+
+
+.selected {
+	border: 2px solid blue;
+}
+
+.unselected {
+	border: 2px solid #00000022;
+}
+
+.btns {
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.btn {
+	color: black;
+	background: #FFFFFF44;
+	border: 1px solid #00000088;
+	padding: 9px 25px;
+	border-radius: 20px;
+	cursor: pointer;
+	box-shadow: 0 4px 5px #88888888;
+	-webkit-transition: all .25s ease;
+	   -moz-transition: all .25s ease;
+	    -ms-transition: all .25s ease;
+	     -o-transition: all .25s ease;
+	        transition: all .25s ease;
+}
+
+.btn:active {
+	box-shadow: none;
+}
+
+.icon {
+	height: 30px;
+
 }
